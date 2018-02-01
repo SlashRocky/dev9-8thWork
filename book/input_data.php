@@ -27,6 +27,26 @@
         margin-right: 40px;
         text-decoration: none;
       }
+      .logout {
+        float: right;
+        margin: 0 40px 0 0;
+         
+      }
+      a:-webkit-any-link {
+        text-decoration: none !important;
+        color: #8f0010 !important;
+      }
+      a:-webkit-any-link:hover {
+        opacity: 0.7;
+      }
+      u {
+        text-decoration: none !important;
+      }
+      .welcome {
+        float: right;
+        margin: 0 40px 0 0;
+        
+      }
     </style>
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/book.js"></script>
@@ -35,13 +55,15 @@
 		<input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
     <main class="wrap indexMain">
       <section class="searchTop on">
-				<!--<a href="login.php" class="login-btn">LogIn</a>-->
-				<!-- ユーザーIDにHTMLタグが含まれても良いようにエスケープする ユーザー名をechoで表示 -->
-				<p>ようこそ<u><?php echo htmlspecialchars($_SESSION['name'], ENT_QUOTES); ?></u>さん</p>
-				<ul>
-					<li><a href="logout.php">ログアウト</a></li>
-				</ul>
-         <div class="inner">
+       
+        <ul class="logout">
+          <li><a href="logout.php">LogOut</a></li>
+        </ul>
+        
+        <!-- ユーザーIDにHTMLタグが含まれても良いようにエスケープする ユーザー名をechoで表示 -->
+        <p class="welcome">ようこそ<u><?php echo htmlspecialchars($_SESSION['name'], ENT_QUOTES); ?></u>さん</p>
+				
+        <div class="inner">
           <h1>book!</h1>
           <p class="searchTop_icon"><span class="icon-book"></span></p>
           <p class="searchTop_catch">本を検索しよう！</p>
