@@ -96,7 +96,7 @@ $(function(){
     ----------------------------------------  */
     //保存したい書籍の「id」を変数BookIdに格納
     var BookId = $(this).data("id");
-
+		var userId = $("input[name=userId]").val();
     //ajax通信
     $.ajax({
       url:'https://www.googleapis.com/books/v1/volumes/'+BookId,
@@ -117,7 +117,7 @@ $(function(){
       var BookDescript = data.volumeInfo.description;
 
       //送信するデータを、変数postDataに{名前：値}のセットで記述
-      var postData = {'id':BookId, 'title':BookTitle, 'url':BookImg, 'comment':BookDescript};
+      var postData = {'userId':userId, 'bookId':BookId, 'title':BookTitle, 'url':BookImg, 'comment':BookDescript};
       console.log(postData);
 
       //AjaxでpostDataをinsert_data.phpにPOST送信
@@ -131,8 +131,11 @@ $(function(){
       .done(function(data, dataType) {
 
         console.log('success_insert');
+				console.log(data);
         //postData確認
         console.log(postData);
+				
+				location.href="output_data.php";
 
       })
       //失敗した場合

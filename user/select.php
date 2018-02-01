@@ -8,7 +8,7 @@
 	}
 
 	//２．データ登録SQL作成
-	$stmt = $pdo->prepare("SELECT * FROM gs_an_table");
+	$stmt = $pdo->prepare("SELECT * FROM gs_user_table");
 	$flag = $stmt->execute();
 
 	//３．データ表示

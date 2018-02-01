@@ -1,3 +1,15 @@
+<?php
+	session_start();
+
+	//ログイン状態チェック
+	if( !isset($_SESSION['name']) ){
+		header('Location: logout.php');
+		exit;
+	}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -5,18 +17,32 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Book Memo</title>
+    <title>Search | BookMark</title>
     <link rel="stylesheet" href="css/icomoon/icomoon_style.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+      .login-btn {
+        float: right;
+        color: #000;
+        margin-right: 40px;
+        text-decoration: none;
+      }
+    </style>
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/book.js"></script>
   </head>
   <body>
+		<input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
     <main class="wrap indexMain">
       <section class="searchTop on">
-        <div class="inner">
+				<!--<a href="login.php" class="login-btn">LogIn</a>-->
+				<!-- ユーザーIDにHTMLタグが含まれても良いようにエスケープする ユーザー名をechoで表示 -->
+				<p>ようこそ<u><?php echo htmlspecialchars($_SESSION['name'], ENT_QUOTES); ?></u>さん</p>
+				<ul>
+					<li><a href="logout.php">ログアウト</a></li>
+				</ul>
+         <div class="inner">
           <h1>book!</h1>
-          <a href="login.php">ログイン</a>
           <p class="searchTop_icon"><span class="icon-book"></span></p>
           <p class="searchTop_catch">本を検索しよう！</p>
         </div>

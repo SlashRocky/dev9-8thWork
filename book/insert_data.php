@@ -2,12 +2,12 @@
   session_start();
   
   //userIdを受け取る
-  $userId = $_SESSION['userId'];
+$userId = isset($_POST['userId']) ? $_POST['userId'] : 11111;
 
   /* ----------------------------------------
   POST送信されたデータの受け取り
   ---------------------------------------- */
-  $id = $_POST['id'];
+  $bookId = $_POST['bookId'];
   $title = $_POST['title'];
   $url = $_POST['url'];
   $comment = $_POST['comment'];
@@ -31,17 +31,17 @@
   }
 
   //実行したいSQL文を変数$sqlに格納
-$sql = "INSERT INTO gs_an_table (no, userId, id, title, url, comment, regiDate) VALUES ( NULL, :userId, :id, :title, :url, :comment, sysdate() )";
+	$sql = "INSERT INTO gs_book_table (no, userId, bookId, title, url, comment, regiDate) VALUES ( NULL, :userId, :bookId, :title, :url, :comment, sysdate() )";
 
   //実行したいSQL文をセット
   $stmt = $pdo -> prepare($sql);
 
   //各パラメーターに保存したい値をセット
-  $stmt -> bindValue(':id',$id,PDO::PARAM_STR);
+	$stmt -> bindValue(':userId',$userId,PDO::PARAM_STR);
+  $stmt -> bindValue(':bookId',$bookId,PDO::PARAM_STR);
   $stmt -> bindValue(':title',$title,PDO::PARAM_STR);
   $stmt -> bindValue(':url',$url,PDO::PARAM_STR);
   $stmt -> bindValue(':comment',$comment,PDO::PARAM_STR);
-  $stmt -> bindValue(':userId',$userId,PDO::PARAM_STR);
 
   //実際に実行　→　それを変数$flagに格納
   $flag = $stmt -> execute();

@@ -12,7 +12,7 @@
 	}
 
 	//２．データ登録SQL作成
-	$sql = 'SELECT * FROM gs_an_table WHERE id=:id';
+	$sql = 'SELECT * FROM gs_user_table WHERE id=:id';
 	$stmt = $pdo -> prepare($sql);
 	//ハッキングされないための関数 bindValueを通して無効化したものを入れる
 	$stmt -> bindValue(":id", $id, PDO::PARAM_INT);
@@ -30,6 +30,20 @@
 	}
 	else{  
 		$result = $stmt -> fetch();
+
+		//実行したいSQL文を変数$aqlに格納
+		$sql = 'SELECT * FROM gs_book_table WHERE userId = :userId';
+
+		//実行したいSQL文をセット
+		$stmt = $pdo -> prepare($sql);
+		$stmt -> bindValue(':userId',$id,PDO::PARAM_STR);
+
+
+		//実際に実行　→　それを変数$flagに格納
+		$flag = $stmt -> execute();
+		while($result2 = $stmt -> fetch(PDO::FETCH_ASSOC)){
+			echo $result2['title'].",";
+		}
 	}
 ?>
 

@@ -1,4 +1,9 @@
 <?php 
+
+	session_start();
+
+	$userId = $_SESSION['userId'];
+
   //DB定義
   const DB = "";
   const DB_ID = "root";
@@ -15,10 +20,12 @@
   }
 
   //実行したいSQL文を変数$aqlに格納
-  $sql = 'SELECT * FROM gs_an_table';
+  $sql = 'SELECT * FROM gs_book_table WHERE userId = :userId';
 
   //実行したいSQL文をセット
   $stmt = $pdo -> prepare($sql);
+	$stmt -> bindValue(':userId',$userId,PDO::PARAM_STR);
+
 
   //実際に実行　→　それを変数$flagに格納
   $flag = $stmt -> execute();
@@ -51,7 +58,7 @@
         <h2>追加された書籍</h2>
         <ul>
           <?php
-            while( $result = $stmt->fetch(PDO::FETCH_ASSOC) ){
+            while( $result = $stmt -> fetch(PDO::FETCH_ASSOC) ){
           ?>
             <li>
               <div class="list_t">
