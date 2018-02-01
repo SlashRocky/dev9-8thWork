@@ -49,6 +49,16 @@
     <title>Book Memo</title>
     <link rel="stylesheet" href="css/icomoon/icomoon_style.css">
     <link rel="stylesheet" href="css/style2.css">
+    <style>
+      .toTop{
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .toTopWrapper {
+        text-align: center;
+        margin: 40px 0 0 0;
+      }
+    </style>
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/book.js"></script>
   </head>
@@ -74,6 +84,7 @@
           ?>
         </ul>
       </section>
+      <p class="toTopWrapper"><a href="input_data.php" class="toTop">検索画面に戻る</a></p>
     </main>
   </body>
 </html>
