@@ -131,22 +131,7 @@
 	<body>
 		<div class="form-wrapper">
 			<h1>Log Out</h1>
-			<!--
-			<form method="post" action="login.php">
-				<p style="color:red;"><?php echo $errMsg;?></p>
-				<div class="form-item">
-					<label for="loginId"></label>
-					<input type="text" name="loginId" id="loginId"　required="required" placeholder="Email Address">
-				</div>
-				<div class="form-item">
-					<label for="loginPw"></label>
-					<input type="password" name="loginPw" id="loginPw" required="required" placeholder="Password">
-				</div>
-				<div class="button-panel">
-					<input type="submit" class="button" title="Sign In" value="Log In" name="login">
-				</div>
-			</form>
-			-->
+			<?php echo $errMsg;?>
 			<div class="form-footer">
 				<p><?php echo htmlspecialchars($errMsg, ENT_QUOTES); ?></p>
 				<p style="margin-top: 20px;"><a href="login.php">LogIn画面に戻る</a></p>
