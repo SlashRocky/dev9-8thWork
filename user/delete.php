@@ -9,7 +9,7 @@
   $pdo = db_con();
 
   //２．データ登録SQL作成
-	$sql = 'DELETE FROM gs_an_table WHERE id=:id';
+	$sql = 'DELETE FROM gs_user_table WHERE id=:id';
 
   $stmt = $pdo -> prepare($sql);
   //ハッキングされないための関数 bindValueを通して無効化したものを入れる

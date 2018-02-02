@@ -97,26 +97,6 @@
         }
       </style>
     </noscript>
-   
-    <!-- modal CSS -->
-<!--
-    <link type="text/css" rel="stylesheet" href="lib/css/remodal.css">
-    <link type="text/css" rel="stylesheet" href="lib/css/remodal-default-theme.css">
-    <style>
-      .remodal-bg.with-red-theme.remodal-is-opening,
-      .remodal-bg.with-red-theme.remodal-is-opened {
-        filter: none;
-      }
-
-      .remodal-overlay.with-red-theme {
-        background-color: #f44336;
-      }
-
-      .remodal.with-red-theme {
-        background: #fff;
-      }
-    </style>
--->
     
     <!-- Google CDN jQuery with fallback to local -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -186,27 +166,6 @@
           <a href="index.php" class="new-btn color-f fs-14 d-block ta-center w90 m-auto b-all-f pr20 pl20 pt10 pb10 br-4 bg-3 op-05 c-pointer">
             <i class="fa fa-plus color-f"></i>&emsp;ユーザー新規登録
           </a>
-          <div class="ta-center mt20 mb20">
-		    		<input name="" value="" placeholder="ユーザーを検索" class="search w64 m-auto pt10 pb10 pr10 pl40 color-22 fs-14 b-all-bf br-4" type="text">
-          </div>
-<!--
-          <div class="list-box">
-            <ul class="list-box-inner ta-center">
-              <li class="list h60p btn btn1" value="HTML"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">HTML</a></li>
-              <li class="list h60p btn btn2" value="CSS"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">CSS</a></li>
-              <li class="list h60p btn btn3" value="JavaScript"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">JavaScript</a></li>
-              <li class="list h60p btn btn4" value="jQuery"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">jQuery</a></li>
-              <li class="list h60p btn btn5" value="React"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">React</a></li>
-              <li class="list h60p btn btn6" value="Node.js"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">Node.js</a></li>
-              <li class="list h60p btn btn7" value="PHP"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">PHP</a></li>
-              <li class="list h60p btn btn8" value="Laravel"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">Laravel</a></li>
-              <li class="list h60p btn btn9" value="MySQL"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">My SQL</a></li>
-              <li class="list h60p btn btn10" value="Ruby"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">Ruby</a></li>
-              <li class="list h60p btn btn11" value="RubyOnRails"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">Ruby on Rails</a></li>
-              <li class="list h60p btn btn12" value="Other"><a href="javascript:void(0);" class="ff-robotoCds color-f fs-20 fw-bold lh-03 d-block">Other</a></li>
-            </ul>
-          </div>
--->
         </div>
       </header>
       
@@ -220,47 +179,6 @@
           </div>
         </section>
       </main>
-
-<!--
-      <div class="remodal" data-remodal-id="modal" role="dialog">
-        <button data-remodal-action="close" class="remodal-close close-btn" aria-label="Close"></button>
-        <dl class="entryBox">
-          <dt class="p15 bg-lg bs-bbox clearfix">
-            <div class="selectWrap mr20">
-		      <select name="input-category" class="input-category s-bbox w240 h36 mt8 mb8 fs-16 color-22 lh-016">
-                <option value="btn1">HTML</option>
-                <option value="btn2">CSS</option>
-                <option value="btn3">JavaScript</option>
-                <option value="btn4">jQuery</option>
-                <option value="btn5">React</option>
-                <option value="btn6">Node.js</option>
-                <option value="btn7">PHP</option>
-                <option value="btn8">Laravel</option>
-                <option value="btn9">My SQL</option>
-                <option value="btn10">Ruby</option>
-                <option value="btn11">Ruby on Rails</option>
-                <option value="btn12">Other</option>
-              </select>
-            </div>
-            <input type="text" placeholder="タイトルを入力してください。" class="input-title d-block w100 pl15 h30p bg-tp b-bot-c bs-bbox color-22 fs-16 ff-gothic mt10 w75">
-          </dt>
-          <dd class="bg-f b-top-bf pt15 pl15 pr15 pb10 bs-bbox">
-            <textarea cols="30" rows="10" placeholder="本文を入力してください。" class="input-comment r-none b-all-c w100 pl15 pr15 pt7 pb15 bs-bbox color-22 fs-16 ff-gothic lh-015"></textarea>
-          </dd>
-				</dl>
-         
-        <div class="modalBtn pb15 pl15 pr15 w100 bs-bbox bg-f">
-           新規作成時 
-          <div class="m-auto w140">
-                  <button data-remodal-action="confirm" class="remodal-confirm save-btn ta-center pl20 pr20 pt8 pb8 color-f fs-14 bg-3 br-4 c-pointer bs-bbox op-09">保存して閉じる</button>
-          </div>
-           更新時 
-          <div class="m-auto w140">
-            <button data-remodal-action="confirm" class="remodal-confirm update-btn ta-center pl20 pr20 pt8 pb8 color-f fs-14 bg-3 br-4 c-pointer bs-bbox op-09">更新して閉じる</button>
-          </div>
-        </div>
-      </div>
--->
       
     </div>
     
