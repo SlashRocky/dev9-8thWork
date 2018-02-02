@@ -95,8 +95,8 @@
 										<legend>USER新規登録</legend>
 										<label>名前：<input type="text" name="name"></label><br>
 										<label>Email：<input type="text" name="email"></label><br>
-                                      <label>ログインID：<input type="text" name="loginId"></label><br>
-                                      <label>ログインパスワード：<input type="text" name="loginPw"></label><br>
+                                        <label>ログインID：<input type="text" name="loginId"></label><br>
+                                        <label>ログインパスワード：<input type="text" name="loginPw"></label><br>
 										<label><textArea name="naiyou" rows="4" cols="40"></textArea></label><br>
 										<input type="submit" value="送信">
 									</fieldset>

@@ -180,6 +180,8 @@
 								<legend>USER情報</legend>
 								<label>名前：<input type="text" name="name" value="<?=$result["name"]?>"></label><br>
 								<label>Email：<input type="text" name="email" value="<?=$result["email"]?>"></label><br>
+                                <label>ログインID：<input type="text" name="loginId" value="<?=$result["loginId"]?>"></label><br>
+                                <label>ログインパスワード：<input type="text" name="loginPw" value="<?=$result["loginPw"]?>"></label><br>
 								<label><textArea name="naiyou" row="4" cols="40"><?=$result["naiyou"]?></textArea></label><br>
 								<input type="submit" value="送信">
 								<!-- 裏でidを渡す -->
