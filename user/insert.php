@@ -24,13 +24,16 @@
   $pdo = db_con();
 
 
-  //３．データ登録SQL作成 この関数作れたいいね
-  $stmt = $pdo -> prepare("INSERT INTO gs_user_table(id, loginId, loginPw, name, email, naiyou, indate)VALUES(NULL, :loginId ,:loginPw, :a1, :a2, :a3, sysdate())");
+  //３．データ登録SQL作成
+  $stmt = $pdo -> prepare("INSERT INTO gs_user_table(id, loginId, loginPw, name, email, naiyou, indate)VALUES(NULL, :loginId ,:loginPw, :name, :email, :naiyou, sysdate())");
+  
   $stmt -> bindValue(':loginId', $loginId, PDO::PARAM_STR);
   $stmt -> bindValue(':loginPw', $loginPw, PDO::PARAM_STR);
-  $stmt -> bindValue(':a1', $name, PDO::PARAM_STR);
-  $stmt -> bindValue(':a2', $email, PDO::PARAM_STR);
-  $stmt -> bindValue(':a3', $naiyou, PDO::PARAM_STR);
+  $stmt -> bindValue(':name', $name, PDO::PARAM_STR);
+  $stmt -> bindValue(':email', $email, PDO::PARAM_STR);
+  $stmt -> bindValue(':naiyou', $naiyou, PDO::PARAM_STR);
+  
+  //実行
   $status = $stmt -> execute();
 
   //４．データ登録処理後

@@ -1,49 +1,46 @@
 <?php
-	//1.  DB接続します
-	try {
-		$pdo = new PDO('mysql:dbname=gs_db; charset=utf8; host=localhost', 'root', '');
-	}
-	catch (PDOException $e) {
-		exit('データベースに接続できませんでした。'.$e -> getMessage());
-	}
+  //1.  DB接続します
+  try {
+    $pdo = new PDO('mysql:dbname=gs_db; charset=utf8; host=localhost', 'root', '');
+  }
+  catch (PDOException $e) {
+    exit('データベースに接続できませんでした。'.$e -> getMessage());
+  }
 
-	//２．データ登録SQL作成
-	$stmt = $pdo->prepare("SELECT * FROM gs_user_table");
-	$flag = $stmt->execute();
+  //２．データ登録SQL作成
+  $stmt = $pdo->prepare("SELECT * FROM gs_user_table");
+  $flag = $stmt->execute();
 
-	//３．データ表示
-	$view="";
+  //３．データ表示
+  $view="";
 
-	if($flag==false){
-		//execute（SQL実行時にエラーがある場合）
-		$error = $stmt->errorInfo();
-		exit("ErrorQuery:".$error[2]);
-	}
-	else{
-		//Selectデータの数だけ自動でループしてくれる ->は中の〜関数を使うという意味 :〜はバインド関数
-		while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-			$view .= '<div class="one">';
-				$view .= '<p class="one-inner">';
-//					$view .= '<a class="one_inner" href="detail.php?id='.$result["id"].'">';
-						$view .= 'No.'.$result["id"].'　　';
-						$view .= $result["name"];
-//					$view .= '</a>';
-					$view .= '';
-					$view .= '<a href="delete.php?id='.$result["id"].'">'; 
-						$view .= '<img src="lib/img/icon_delete.png" class="icon_delete">';
-					$view .= '</a>';
-					$view .= '<a href="detail.php?id='.$result["id"].'">'; 
-						$view .= '<img src="lib/img/icon_edit.png" class="icon_delete">';
-					$view .= '</a>';
-					$view .= '<span class="indate">'.$result["indate"].'</span>';
-				$view .= '</p>';
-			$view .= '</div>';
-		}
-	}
+  if($flag==false){
+    //execute（SQL実行時にエラーがある場合）
+    $error = $stmt->errorInfo();
+    exit("ErrorQuery:".$error[2]);
+  }
+  else{
+    //データの数だけ自動でループしてくれる ->は中の〜関数を使うという意味 :〜はバインド関数
+    while( $result = $stmt -> fetch(PDO::FETCH_ASSOC)){
+      $view .= '<div class="one">';
+        $view .= '<p class="one-inner">';
+          //$view .= '<a class="one_inner" href="detail.php?id='.$result["id"].'">';
+            $view .= 'No.'.$result["id"].'　　';
+            $view .= $result["name"];
+          //$view .= '</a>';
+          $view .= '';
+          $view .= '<a href="delete.php?id='.$result["id"].'">'; 
+            $view .= '<img src="lib/img/icon_delete.png" class="icon_delete">';
+          $view .= '</a>';
+          $view .= '<a href="detail.php?id='.$result["id"].'">'; 
+            $view .= '<img src="lib/img/icon_edit.png" class="icon_delete">';
+          $view .= '</a>';
+          $view .= '<span class="indate">'.$result["indate"].'</span>';
+        $view .= '</p>';
+      $view .= '</div>';
+    }
+  }
 ?>
-
-
-
 
 <!doctype html>
 
@@ -90,10 +87,10 @@
     <noscript>
       <style>
         .st-accordion ul li{
-            height:auto;
+          height:auto;
         }
         .st-accordion ul li > a span{
-            visibility:hidden;
+          visibility:hidden;
         }
       </style>
     </noscript>
@@ -174,7 +171,7 @@
         <section id="main-inner" class="mr200 pt30 pb10">
           <div class="container">
             <div class="wrapper">
-							<?=$view?>
+		      <?=$view?>
             </div>
           </div>
         </section>
