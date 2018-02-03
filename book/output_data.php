@@ -25,7 +25,7 @@
 
   //実行したいSQL文をセット
   $stmt = $pdo -> prepare($sql);
-  $stmt -> bindValue(':userId',$userId,PDO::PARAM_STR);
+  $stmt -> bindValue(':userId', $userId, PDO::PARAM_STR);
 
   //実際に実行　→　それを変数$flagに格納
   $flag = $stmt -> execute();
@@ -67,6 +67,7 @@
           <h2>追加された書籍</h2>
           <ul>
             <?php
+              //実行して返ってきたデータを変数$resultに格納　書籍データの数だけwhileで回して表示
               while( $result = $stmt -> fetch(PDO::FETCH_ASSOC) ){
             ?>
               <li>
