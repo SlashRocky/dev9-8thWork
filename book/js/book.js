@@ -96,14 +96,16 @@ $(function(){
     ----------------------------------------  */
     //保存したい書籍の「id」を変数BookIdに格納
     var BookId = $(this).data("id");
-		var userId = $("input[name=userId]").val();
+    
+    //input_data.phpのファイルでhiddenで渡された「name=userId」の値を変数userIdに格納
+    var userId = $("input[name=userId]").val();
+    
     //ajax通信
     $.ajax({
       url:'https://www.googleapis.com/books/v1/volumes/'+BookId,
       type:'POST',
       dataType:'jsonp',
     })
-
     //成功した場合
     .done(function(data){
       
@@ -131,11 +133,12 @@ $(function(){
       .done(function(data, dataType) {
 
         console.log('success_insert');
-				console.log(data);
+		console.log(data);
         //postData確認
         console.log(postData);
-				
-				location.href="output_data.php";
+		
+        //成功した場合output_data.phpにリダイレクト
+		location.href="output_data.php";
 
       })
       //失敗した場合
@@ -147,7 +150,6 @@ $(function(){
 
       });
     })
-
     //失敗した場合
     .fail(function(data){
       
@@ -156,9 +158,6 @@ $(function(){
       console.log(data);
       
     });
-
     return false;
-
   });
-	
 });
