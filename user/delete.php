@@ -1,15 +1,15 @@
 <?php
   //index.php（登録フォームの画面ソースコードを全コピーして、このファイルをまるっと上書き保存）
 
-	include("functions.php");
+  include("functions.php");
 
-	$id = $_GET["id"];
+  $id = $_GET["id"];
 
   //1.  DB接続します
   $pdo = db_con();
 
   //２．データ登録SQL作成
-	$sql = 'DELETE FROM gs_user_table WHERE id=:id';
+  $sql = 'DELETE FROM gs_user_table WHERE id=:id';
 
   $stmt = $pdo -> prepare($sql);
   //ハッキングされないための関数 bindValueを通して無効化したものを入れる
@@ -25,7 +25,8 @@
 
     error_db_Info($stmt);
 
-  } else {
+  } 
+  else {
 
     //Selectデータの数だけ自動でループしてくれる ->は中の〜関数を使うという意味 :〜はバインド関数
 
