@@ -1,4 +1,6 @@
 # dev9-8thWork
+//gs_user_tableのid = gs_book_tableのuserId
+
 /* ———————————————————————————————————————————
 ユーザーサイド
 
