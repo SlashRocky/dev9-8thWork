@@ -1,16 +1,15 @@
 <?php 
+  //セッションスタート開始
   session_start();
-  
-  //userIdを受け取る
-  $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
 
   /* ----------------------------------------
-  POST送信されたデータの受け取り
+  book.jsのファイルでPOST送信されたデータの受け取り
   ---------------------------------------- */
-  $bookId = $_POST['bookId'];
-  $title = $_POST['title'];
-  $url = $_POST['url'];
-  $comment = $_POST['comment'];
+  $userId = isset($_POST['userId']) ? $_POST['userId'] : '';
+  $bookId = isset($_POST['bookId']) ? $$_POST['bookId'] : '';
+  $title = isset($_POST['title']) ? $_POST['title'] : '';
+  $url = isset($_POST['url']) ? $_POST['url'] '';
+  $comment = isset($_POST['comment']) ? $_POST['comment'] : '';
 
   /* ----------------------------------------
   受け取ったデータをデータベースに書き込む
