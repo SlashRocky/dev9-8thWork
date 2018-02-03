@@ -1,5 +1,4 @@
 <?php
-
   //セッション開始
   session_start();
 
@@ -34,7 +33,7 @@
     //エラーがない場合
     if( !empty($_POST['loginId']) && !empty($_POST['loginPw']) ) {
 
-      //入力されたログインIDを格納
+      //入力されたログインIDを変数$loginIdに格納
       $loginId = $_POST['loginId'];
 
       //ログインIDとログインパスワードが入力されていたら認証する
@@ -48,7 +47,7 @@
         //prepareメソッドでSQLをセット
         $stmt = $pdo -> prepare('SELECT * FROM gs_user_table WHERE loginId = ?');
 				
-        //executeでクエリを実行
+        //executeでクエリを実行(loginIdが一致する行を抽出)
         $stmt -> execute( array($loginId) );
 				
         //入力されたログインパスワードを$loginPwに格納
@@ -59,17 +58,17 @@
 
           $errMsg .= $row['loginPw'].",";
 
-          //入力したログインパスワードとデータベースのパスワードが一致したら
-          if ( $loginPw == $row['loginPw'] ) {
+          //データベースのパスワードと入力したログインパスワードとが一致したら
+          if ( $row['loginPw'] == $loginPw ) {
 
             //認証成功なら、セッションIDを新規に発行する
             session_regenerate_id(true);
 
-            //データベースから取得したuserIdを変数$useIdに格納
-            $userId = $row['userId'];
+            //データベースから取得したidを変数$idに格納
+            $id = $row['id'];
 
             //入力したuserIdからユーザー名を取得したい
-            $sql = "SELECT * FROM gs_user_table WHERE userId = $userId";
+            $sql = "SELECT * FROM gs_user_table WHERE id = $id";
 
             //変数の割当が必要ない時は"prepareメソッド"ではなく"queryメソッド"でOK
             $stmt = $pdo -> query($sql);
@@ -77,7 +76,7 @@
             //リネームって感じ
             foreach ($stmt as $row) {
               //ユーザーID
-              $row['userId'];  
+              $row['id'];  
               
               //ユーザーの名前
               $row['name'];
@@ -86,6 +85,7 @@
 
             //データベースから取得してきたデータをセッション変数に渡す
             $_SESSION['name'] = $row['name'];
+            //gs_user_tableのid = gs_book_tableのidなのでこういう記述にする
             $_SESSION['userId'] = $row['id'];
 
             //書籍検索画面へ遷移
