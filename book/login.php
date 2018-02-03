@@ -4,6 +4,7 @@
 
   /* DB定義
   ------------------------------ */
+  //db用の変数なんだとわかりやすくするためにこういう書き方はあり
   //DBサーバのURL
   $db['host'] = 'localhost';
   //データベース名
@@ -37,22 +38,27 @@
       $loginId = $_POST['loginId'];
 
       //ログインIDとログインパスワードが入力されていたら認証する
+      //この書方はカンマで区切ってあって、host=%sに$db['host']が、dbname=%sに$db['dbname']が格納される
       $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
 
       //DB接続 →　DB内検索（IDが一致するものを探す）
       try{
 		//PDOオブジェクトの生成
         $pdo = new PDO('mysql:host=localhost; dbname=gs_db; charset=utf8','root','');
-      
+
         //prepareメソッドでSQLをセット
         $stmt = $pdo -> prepare('SELECT * FROM gs_user_table WHERE loginId = ?');
-				
+
+        //bindValueを使えば一緒 ?を使わなければいつもと同じ書き方で良い
         //executeでクエリを実行(loginIdが一致する行を抽出)
+        //equcuteもqueryも別に一緒
+        //$stmtはexecuteで実行した返り値
         $stmt -> execute( array($loginId) );
-				
+
         //入力されたログインパスワードを$loginPwに格納
         $loginPw = $_POST['loginPw'];
 
+        //この書き方は一回だけデータをとる場合　データがあるだけ回す場合はwhile
         //$stmt -> fetch(PDO::FETCH_ASSOC)で実行　→　取得したデータを$rowに格納
         if( $row = $stmt -> fetch(PDO::FETCH_ASSOC) ){
 
@@ -73,14 +79,17 @@
             //変数の割当が必要ない時は"prepareメソッド"ではなく"queryメソッド"でOK
             $stmt = $pdo -> query($sql);
 
+            //データの全ての中から一行一行みじん切りにしてデータを抽出するイメージ
             //リネームって感じ
             foreach ($stmt as $row) {
+
+              //これはそのデータを取得したぞ！って感じの書き方
               //ユーザーID
-              $row['id'];  
-              
+              $row['id'];
+
               //ユーザーの名前
               $row['name'];
-                
+
             }
 
             //データベースから取得してきたデータをセッション変数に渡す
@@ -247,7 +256,3 @@
     </div>
   </body>
 </html>
-
-
-
-
