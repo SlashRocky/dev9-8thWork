@@ -3,105 +3,107 @@
   //セッション開始
   session_start();
 
-	/* DB定義
-	------------------------------ */
-	//DBサーバのURL
-	$db['host'] = 'localhost';
-	//データベース名
-	$db['dbname'] = 'gs_db';
+  /* DB定義
+  ------------------------------ */
+  //DBサーバのURL
+  $db['host'] = 'localhost';
+  //データベース名
+  $db['dbname'] = 'gs_db';
 
-	//「ログインされている」という状態を変数$loginに格納
+  //「ログインされている」という状態を変数$loginに格納
   $login = isset($_POST['login']) ? $_POST['login'] : '' ;
 
-	//エラーメッセージの初期化
+  //エラーメッセージの初期化
   $errMsg = "";
 
-	/* ログインボタンが押された場合
-	------------------------------ */
-	if($login){
+  /* ログインボタンが押された場合
+  ------------------------------ */
+  if($login){
 
     /* エラーチェック
-		------------------------------ */
+    ------------------------------ */
     //IDが未入力の場合 emptyは値が空の時
-		if( empty($_POST['loginId']) ){
-			$errMsg .= 'ログインIDが未入力です<br />';
-		}
+    if( empty($_POST['loginId']) ){
+      $errMsg .= 'ログインIDが未入力です<br />';
+    }
     //PASSWORDが未入力の場合
-		else if( empty($_POST['loginPw']) ){
-			$errMsg .= 'ログインパスワードが未入力です<br />';
-		}
+    else if( empty($_POST['loginPw']) ){
+      $errMsg .= 'ログインパスワードが未入力です<br />';
+    }
 
-		//エラーがない場合
-		if( !empty($_POST['loginId']) && !empty($_POST['loginPw']) ) {
-			
-			//入力されたログインIDを格納
-			$loginId = $_POST['loginId'];
-			
-			//ユーザIDとパスワードが入力されていたら認証する
-			$dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
-			
+    //エラーがない場合
+    if( !empty($_POST['loginId']) && !empty($_POST['loginPw']) ) {
+
+      //入力されたログインIDを格納
+      $loginId = $_POST['loginId'];
+
+      //ログインIDとログインパスワードが入力されていたら認証する
+      $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
+
       //DB接続 →　DB内検索（IDが一致するものを探す）
       try{
-				//PDOオブジェクトの生成
+		//PDOオブジェクトの生成
         $pdo = new PDO('mysql:host=localhost; dbname=gs_db; charset=utf8','root','');
       
-				//prepareメソッドでSQLをセット
-				$stmt = $pdo -> prepare('SELECT * FROM gs_user_table WHERE loginId = ?');
+        //prepareメソッドでSQLをセット
+        $stmt = $pdo -> prepare('SELECT * FROM gs_user_table WHERE loginId = ?');
 				
-				//executeでクエリを実行　executeは更新？？
-				$stmt -> execute( array($loginId) );
+        //executeでクエリを実行
+        $stmt -> execute( array($loginId) );
 				
-				//入力されたログインパスワードを$loginPwに格納
-				$loginPw = $_POST['loginPw'];
+        //入力されたログインパスワードを$loginPwに格納
+        $loginPw = $_POST['loginPw'];
 
-				//$stmt -> fetch(PDO::FETCH_ASSOC)で実行　→　取得したデータを$rowに格納
-				if( $row = $stmt -> fetch(PDO::FETCH_ASSOC) ){
-					
-					$errMsg .= $row['loginPw'].",";
-					
-					//入力したログインパスワードとデータベースのパスワードが一致したら
-					if ( $loginPw == $row['loginPw'] ) {
-						
-						//認証成功なら、セッションIDを新規に発行する
-						session_regenerate_id(true);
-						
-						//データベースから取得したuserIdを変数$useIdに格納
-						$userId = $row['userId'];
-						
-						//入力したIDからユーザー名を取得したい
-						$sql = "SELECT * FROM gs_user_table WHERE userId = $userId";
-						
-						//※1回だけ使用するようなSQL文をデータベースへ送信するにはPDOクラスで用意されている"query"メソッドを使う
-						$stmt = $pdo -> query($sql);
-						
-						//リネームって感じ
-						foreach ($stmt as $row) {
-							//ユーザーの名前
-							$row['name'];
-							//ユーザーID
-							$row['userId'];
-						}
-						
-						//データベースから取得してきたデータをセッション変数に渡す
-						$_SESSION['name'] = $row['name'];
-						$_SESSION['userId'] = $row['id'];
-						
-						//書籍検索画面へ遷移
-						header('Location: input_data.php');
-						//処理終了
-						exit();
-					}
-					//認証失敗
-					else{
-						$errMsg .= 'ログインIDあるいはログインパスワードに誤りがあります。';
-					}
-				}
-				//該当データなし
-				else{
-					$errMsg = 'LoginIDあるいはLoginパスワードに誤りがあります。';
-				}
-			}
-			//DB接続失敗
+        //$stmt -> fetch(PDO::FETCH_ASSOC)で実行　→　取得したデータを$rowに格納
+        if( $row = $stmt -> fetch(PDO::FETCH_ASSOC) ){
+
+          $errMsg .= $row['loginPw'].",";
+
+          //入力したログインパスワードとデータベースのパスワードが一致したら
+          if ( $loginPw == $row['loginPw'] ) {
+
+            //認証成功なら、セッションIDを新規に発行する
+            session_regenerate_id(true);
+
+            //データベースから取得したuserIdを変数$useIdに格納
+            $userId = $row['userId'];
+
+            //入力したuserIdからユーザー名を取得したい
+            $sql = "SELECT * FROM gs_user_table WHERE userId = $userId";
+
+            //変数の割当が必要ない時は"prepareメソッド"ではなく"queryメソッド"でOK
+            $stmt = $pdo -> query($sql);
+
+            //リネームって感じ
+            foreach ($stmt as $row) {
+              //ユーザーID
+              $row['userId'];  
+              
+              //ユーザーの名前
+              $row['name'];
+                
+            }
+
+            //データベースから取得してきたデータをセッション変数に渡す
+            $_SESSION['name'] = $row['name'];
+            $_SESSION['userId'] = $row['id'];
+
+            //書籍検索画面へ遷移
+            header('Location: input_data.php');
+            //処理終了
+            exit();
+          }
+          //認証失敗
+          else{
+            $errMsg .= 'ログインIDあるいはログインパスワードに誤りがあります。';
+          }
+        }
+        //該当データなし
+        else{
+          $errMsg = 'LoginIDあるいはLoginパスワードに誤りがあります。';
+        }
+      }
+      //DB接続失敗
       catch(PDOException $e){
         exit( 'DbConnectError:'.$e->getMessage() );
       }

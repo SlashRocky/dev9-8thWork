@@ -1,11 +1,11 @@
 <?php
-	session_start();
+  session_start();
 
-	//ログイン状態チェック
-	if( !isset($_SESSION['name']) ){
-		header('Location: logout.php');
-		exit;
-	}
+  //ログイン状態チェック
+  if( !isset($_SESSION['name']) ){
+    header('Location: logout.php');
+    exit();
+  }
 ?>
 
 
@@ -52,7 +52,7 @@
     <script src="js/book.js"></script>
   </head>
   <body>
-		<input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
+    <input type="hidden" name="userId" value="<?php echo $_SESSION['userId']; ?>">
     <main class="wrap indexMain">
       <section class="searchTop on">
        
